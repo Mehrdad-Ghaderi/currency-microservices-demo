@@ -80,7 +80,13 @@ This project consists of four related microservices demonstrating common pattern
 
 7. Test the API gateway by hitting a sample endpoint, for example:
     ```bash
-    curl "http://localhost:8765/conversion?from=USD&to=EUR&quantity=100"
+    curl "http://localhost:8765/api/v1/currency-conversion/from/USD/to/CAD/quantity/5"
+    ```
+   ```bash
+    curl "http://localhost:8765/api/v1/currency-conversion-feign/from/USD/to/CAD/quantity/6"
+    ```
+   ```bash
+    curl "http://localhost:8765/api/v1/currency-exchange/from/USD/to/CAD/quantity/7"
     ```
 
 ---
@@ -105,4 +111,4 @@ This project consists of four related microservices demonstrating common pattern
 - 4 microservices with separate repos: naming-server, currency-exchange, currency-conversion, api-gateway
 - Start services in this order: naming-server → currency-exchange → currency-conversion → api-gateway
 - Access Eureka dashboard at [http://localhost:8761](http://localhost:8761)
-- Use API Gateway at [http://localhost:8765](http://localhost:8765) for client requests
+
