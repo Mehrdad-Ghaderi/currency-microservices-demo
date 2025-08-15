@@ -60,6 +60,7 @@ docker-compose up -d
 
 3. Access services:
 - Eureka dashboard: http://localhost:8761
+- Zipkin dashboard: http://localhost:9411
 - API Gateway sample endpoints:
 ```
 curl "http://localhost:8765/api/v1/currency-conversion/from/USD/to/CAD/quantity/5"
