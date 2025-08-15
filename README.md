@@ -1,13 +1,13 @@
 # Currency Microservices Demo
 
 > A simple microservices demo showcasing service discovery, API Gateway, and inter-service communication  
-> Built with Spring Boot, Eureka, and Spring Cloud Gateway
+> Built with Spring Boot, Eureka, Spring Cloud Gateway, and Docker
 
 ---
 
 ## Overview
 
-This project consists of four related microservices demonstrating common patterns:
+This project consists of ***four related microservices*** demonstrating common patterns:
 
 | Service Name             | Purpose                        | Repo Link                                                                                     |
 |-------------------------|-------------------------------|----------------------------------------------------------------------------------------------|
@@ -40,8 +40,38 @@ This project consists of four related microservices demonstrating common pattern
 - The API Gateway routes requests to microservices using service discovery from the naming-server (Eureka).
 - The currency-conversion service calls the currency-exchange service internally.
 - The naming-server acts as a registry for all services.
+- Zipkin collects distributed tracing data.
 
 ---
+
+## Run with Docker Compose
+
+1. Clone this umbrella repo:
+
+```bash
+git clone https://github.com/Mehrdad-Ghaderi/currency-microservices-demo.git
+cd currency-microservices-demo
+```
+
+2. Start all service with Docker Compose:
+```
+docker-compose up -d
+```
+
+3. Access services:
+- Eureka dashboard: http://localhost:8761
+- API Gateway sample endpoints:
+```
+curl "http://localhost:8765/api/v1/currency-conversion/from/USD/to/CAD/quantity/5"
+curl "http://localhost:8765/api/v1/currency-conversion-feign/from/USD/to/CAD/quantity/6"
+curl "http://localhost:8765/api/v1/currency-exchange/from/USD/to/CAD/quantity/7"
+```
+
+## Notes
+
+- Environment variables for Eureka and Zipkin are already configured in docker-compose.yaml.
+- No need to change image names; Docker Hub images are ready to use.
+- This setup works on any machine with Docker and Docker Compose installed.
 
 ## How to run locally
 
@@ -100,11 +130,6 @@ This project consists of four related microservices demonstrating common pattern
 
 ---
 
-## Next Steps
-
-- Optionally, create Dockerfiles and Docker Compose files to run all services together in containers.
-- Add OpenAPI/Swagger docs for easier API exploration.
-- Add CI/CD pipelines to automate build and deploy.
 
 # TL;DR
 
