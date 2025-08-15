@@ -7,15 +7,17 @@
 
 ## Overview
 
-This project consists of ***four related microservices*** demonstrating common patterns:
+This project consists of **four related microservices** demonstrating common patterns:
 
 | Service Name             | Purpose                        | Repo Link                                                                                     |
 |-------------------------|-------------------------------|----------------------------------------------------------------------------------------------|
 | naming-server           | Service Discovery (Eureka)     | [naming-server](https://github.com/Mehrdad-Ghaderi/naming-server)                            |
-| currency-exchange       | Provides currency exchange rates | [currency-exchange-service](https://github.com/Mehrdad-Ghaderi/currency-exchange-service)    |
+| currency-exchange       | Provides currency exchange rates(DB & live from Frankfurter API) | [currency-exchange-service](https://github.com/Mehrdad-Ghaderi/currency-exchange-service)    |
 | currency-conversion     | Converts currency using exchange | [currency-conversion-service](https://github.com/Mehrdad-Ghaderi/currency-conversion-service)|
 | api-gateway            | Routes client requests          | [api-gateway](https://github.com/Mehrdad-Ghaderi/api-gateway)                                |
 
+- The currency-exchange service fetches live rates from an external API in addition to using the local H2 database.
+- Users can specify whether they want DB or live rates via the endpoint (/db/... or /live/...).
 ---
 
 ## Architecture Diagram
@@ -37,9 +39,10 @@ This project consists of ***four related microservices*** demonstrating common p
                         (port 8761)
 
 
-- The API Gateway routes requests to microservices using service discovery from the naming-server (Eureka).
-- The currency-conversion service calls the currency-exchange service internally.
-- The naming-server acts as a registry for all services.
+- naming-server: central registry for all microservices; allows dynamic discovery without hardcoding URLs
+- api-gateway: exposes a single entry point for clients, routing requests and applying cross-cutting concerns like logging or security.
+- currency-exchange: provides exchange rates; now enhanced to fetch live rates for more realistic scenarios.
+- currency-conversion: demonstrates inter-service communication by converting currency amounts using exchange rates from currency-exchange.
 - Zipkin collects distributed tracing data.
 
 ---
