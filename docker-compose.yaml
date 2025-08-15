@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  currency-exchange:
+    image: mehrdadghaderi/currency-exchange-service:0.0.1
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      "EUREKA.CLIENT.SERVICEURL.DEFAULTZONE": "http://naming-server:8761/eureka"
+      "SPRING.ZIPKIN.BASEURL": "http://zipkin-server:9411"
+
+  currency-conversion:
+    image: mehrdadghaderi/currency-conversion-service:0.0.1
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      "EUREKA.CLIENT.SERVICEURL.DEFAULTZONE": "http://naming-server:8761/eureka"
+      "SPRING.ZIPKIN.BASEURL": "http://zipkin-server:9411"
+
+
+  api-gateway:
+    image: mehrdadghaderi/api-gateway:0.0.1
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      "EUREKA.CLIENT.SERVICEURL.DEFAULTZONE": "http://naming-server:8761/eureka"
+      "SPRING.ZIPKIN.BASEURL": "http://zipkin-server:9411"
+
+  naming-server:
+    image: mehrdadghaderi/naming-server:0.0.1
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
+  zipkin-server:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - currency-network
+
+networks:
+  currency-network:
