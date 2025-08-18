@@ -74,9 +74,11 @@ docker-compose up -d
   curl "http://localhost:8765/api/v1/currency-exchange/from/USD/to/CAD""
   ```
 
-``` bash
-  curl "http://localhost:8765/api/v1/currency-conversion/from/USD/to/CAD/quantity/5"
-  ```
+[//]: # (``` bash)
+
+[//]: # (  curl "http://localhost:8765/api/v1/currency-conversion/from/USD/to/CAD/quantity/5")
+
+[//]: # (  ```)
 
  ``` bash
   curl "http://localhost:8765/api/v1/currency-conversion-feign/from/USD/to/CAD/quantity/6"
@@ -95,9 +97,11 @@ docker-compose up -d
     curl "http://localhost:8000/api/v1/currency-exchange/from/USD/to/CAD"
    ```
 
-   ``` bash
-    curl "http://localhost:8100/api/v1/currency-conversion/from/USD/to/CAD/quantity/5"
-   ```
+[//]: # (   ``` bash)
+
+[//]: # (    curl "http://localhost:8100/api/v1/currency-conversion/from/USD/to/CAD/quantity/5")
+
+[//]: # (   ```)
 
 ``` bash
  curl "http://localhost:8100/api/v1/currency-conversion-feign/from/USD/to/CAD/quantity/6"
